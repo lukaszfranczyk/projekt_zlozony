@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<link rel="stylesheet" type="text/css" href="/static/css/style.css" />
-	<script src="/static/js/init.js"></script>
-</head>
-<body>
-	<img src="/static/images/tornado.jpg" />
-	<h1>Hello World !</h1>
-</body>
-</html>
+{% extends "base.html" %}
+{% block body_template %}
+<img src="/static/images/tornado.jpg" />
+<h1>Hello World 2!</h1>
+{% end %}
