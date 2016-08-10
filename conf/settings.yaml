@@ -1,0 +1,5 @@
+db_name: portal
+db_user: portal_user
+db_password: portal_password
+db_port: 5432
+db_host: localhost

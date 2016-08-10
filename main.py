@@ -13,8 +13,7 @@ class MainHandler(Application):
             "compiled_template_cache": False,
             "debug": True,
             "login_url": "/auth/login",
-            "cookie_secret": "91d3c543bc00442a4cf5f674b0fb0fea",
-            "xsrf_cookies": True
+            "cookie_secret": "91d3c543bc00442a4cf5f674b0fb0fea"
         }
         super().__init__(**settings)
         self.add_handlers("^.*$", [

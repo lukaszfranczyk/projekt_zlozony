@@ -5,8 +5,8 @@ from .base_handler import BaseHandler
 
 class IndexHandler(BaseHandler):
 
-	@authenticated
-	@coroutine
-	def get(self, *args, **kwargs):
-		self.render("index.html")
-
+    @authenticated
+    @coroutine
+    def get(self, *args, **kwargs):
+        yield self.db.check()
+        self.render("index.html")

@@ -9,6 +9,6 @@ class LoginHandler(BaseHandler):
         self.render("login.html")
 
     @coroutine
-    def post(self):
+    def post(self, *args, **kwargs):
         self.set_secure_cookie("user",  self.get_argument("login"), expires_days=1)
         self.redirect(self.get_argument("next", "/"))
