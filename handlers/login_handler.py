@@ -1,4 +1,3 @@
-import logging
 from tornado.gen import coroutine
 from .base_handler import BaseHandler
 
@@ -14,7 +13,6 @@ class LoginHandler(BaseHandler):
 
     @coroutine
     def post(self, *args, **kwargs):
-        logging.info("IT'S WORKING")
         login, password = self.get_argument("login"), self.get_argument("password")
         if self.request.uri.startswith(self.SIGNUP):
             yield self.signup(login, password)
@@ -25,30 +23,25 @@ class LoginHandler(BaseHandler):
 
     @coroutine
     def login(self, user, password):
-        try:
-            user_data = yield self.db.get_user(user_name=user)
-        except Exception:
-            self.redirect("/")
-            return
+        user_data = yield self.db.get_user(user_name=user)
         if user_data is None:
-            self.render("login.html", error="Invalid username or password !")
+            self.render("login.html", error="Invalid username !")
             return
-        error = "Invalid password"
-        if user_data[1] == password:
-            self.set_secure_cookie("user",  self.get_argument("login"), expires_days=1)
-            error = ""
-        self.redirect("/", error=error)
+        if user_data[2] == password:
+            self.set_secure_cookie("user", password, expires_days=1)
+            self.redirect("/")
+        else:
+            self.render("login.html", error="Invalid password !")
 
     @coroutine
     def signup(self, user, password):
-        try:
-            user_data = yield self.db.get_user(user_name=user)
-        except Exception:
-            self.redirect("/")
-            return
+        error = "User exists !"
+        user_data = yield self.db.get_user(user_name=user)
         if user_data is None:
-            yield self.db.create_user(user, password)
-            self.set_secure_cookie("user",  password, expires_days=1)
-            self.redirect("/")
-            return
-        self.render("login.html", error="User exists !")
+            ret = yield self.db.create_user(user, password)
+            if ret == "OK":
+                self.set_secure_cookie("user",  password, expires_days=1)
+                self.redirect("/")
+                return
+            error = "Something went wrong, please try again later !"
+        self.render("login.html", error=error)

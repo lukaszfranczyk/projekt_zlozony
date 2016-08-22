@@ -24,7 +24,7 @@ class PgApi(metaclass=Collection):
             logging.info("User created")
         except Exception:
             logging.exception("There was problem to add user %s", name)
-            raise
+            return
         return 'OK'
 
     @coroutine
@@ -45,6 +45,6 @@ class PgApi(metaclass=Collection):
             cursor = yield self.db.execute(select_sql, args)
         except Exception:
             logging.exception("There was a problem to get user %s", args)
-            raise
+            return
         return cursor.fetchone()
 
