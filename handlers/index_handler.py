@@ -9,4 +9,3 @@ class IndexHandler(BaseHandler):
     @coroutine
     def get(self, *args, **kwargs):
         self.render("index.html")
-
