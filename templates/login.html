@@ -2,7 +2,12 @@
 {% block body_template %}
 <div class="center-block" style="width:400px;">
     <h1>Welcome at new portal !</h1>
-    <form method="post">
+    {% if error %}
+    <p class="text-danger">
+        {{ error }}
+    </p>
+    {% end %}
+    <form id="login-signup" method="post">
         <div class="form-group">
             <label for="login">Login</label>
             <input type="text" class="form-control" id="login" placeholder="Login" name="login" required>
@@ -11,7 +16,10 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password" name="password" required>
         </div>
-        <button type="submit" class="btn btn-success center-block">Login</button>
+        <div class="center-block" style="width:135px;">
+            <button type="submit" class="btn btn-success" data-action="/auth/login">Login</button>
+            <button type="submit" class="btn btn-primary" data-action="/auth/signup">Signup</button>
+        </div>
     </form>
 </div>
 {% end %}

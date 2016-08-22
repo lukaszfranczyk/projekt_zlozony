@@ -1,6 +1,9 @@
 CREATE TABLE users (
-    id integer PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     name varchar(255) NOT NULL,
     password varchar(128) NOT NULL,
     CONSTRAINT name UNIQUE(name)
 );
+
+GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO portal_user;
+GRANT ALL ON ALL SEQUENCES IN SCHEMA PUBLIC TO portal_user;
