@@ -2,10 +2,12 @@ import tornado
 import os
 from tornado.web import Application, StaticFileHandler
 from handlers import IndexHandler, LoginHandler
+from utils.logger import Logger
 
 
 class MainHandler(Application):
     def __init__(self):
+        Logger()
         root_dir = os.path.dirname(os.path.abspath(__file__))
         static_path = os.path.join(root_dir, 'public')
         settings = {
@@ -25,5 +27,6 @@ class MainHandler(Application):
 
 if __name__ == '__main__':
     app = MainHandler()
-    app.listen(8080)
+    app.listen(30000)
     tornado.ioloop.IOLoop.current().start()
+

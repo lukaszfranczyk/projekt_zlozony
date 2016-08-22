@@ -8,5 +8,5 @@ class IndexHandler(BaseHandler):
     @authenticated
     @coroutine
     def get(self, *args, **kwargs):
-        yield self.db.check()
         self.render("index.html")
+
