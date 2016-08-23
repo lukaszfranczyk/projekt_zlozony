@@ -9,6 +9,6 @@ class ProfileHandler(BaseHandler):
     @authenticated
     @coroutine
     def get(self, *args, **kwargs):
-        user_data = yield self.db.get_user(user_name=str(self.current_user))
+        user_data = yield self.db.get_user(user_name=self.current_user)
         logging.info(user_data)
-        self.render("profile.html")
+        self.render("profile.html", user_data=user_data)

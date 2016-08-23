@@ -1,4 +1,5 @@
 import momoko
+import psycopg2
 import logging
 from tornado import ioloop
 from tornado.gen import coroutine
@@ -42,7 +43,7 @@ class PgApi(metaclass=Collection):
             select_sql += 'name = %s'
             args.append(user_name)
         try:
-            cursor = yield self.db.execute(select_sql, args)
+            cursor = yield self.db.execute(select_sql, args, cursor_factory=psycopg2.extras.RealDictCursor)
         except Exception:
             logging.exception("There was a problem to get user %s", args)
             return
