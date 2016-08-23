@@ -28,8 +28,8 @@ class LoginHandler(BaseHandler):
             self.render("login.html", error="Invalid username !")
             return
         if user_data[2] == password:
-            self.set_secure_cookie("user", password, expires_days=1)
-            self.redirect("/")
+            self.set_secure_cookie("user", user, expires_days=1)
+            self.redirect("/?user={}".format(user))
         else:
             self.render("login.html", error="Invalid password !")
 
@@ -40,8 +40,8 @@ class LoginHandler(BaseHandler):
         if user_data is None:
             ret = yield self.db.create_user(user, password)
             if ret == "OK":
-                self.set_secure_cookie("user",  password, expires_days=1)
-                self.redirect("/")
+                self.set_secure_cookie("user",  user, expires_days=1)
+                self.redirect("/?user={}".format(user))
                 return
             error = "Something went wrong, please try again later !"
         self.render("login.html", error=error)

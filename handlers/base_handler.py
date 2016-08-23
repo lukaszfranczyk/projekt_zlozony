@@ -28,4 +28,12 @@ class BaseHandler(RequestHandler):
             return {}
 
     def get_current_user(self):
+        self.current_user = self.get_argument("user", None)
+        if self.current_user is None:
+            return
+        try:
+            if self.current_user != self.get_secure_cookie("user").decode('utf-8'):
+                return
+        except Exception:
+            return
         return self.get_secure_cookie("user")

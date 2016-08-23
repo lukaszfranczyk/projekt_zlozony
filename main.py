@@ -1,11 +1,12 @@
 import tornado
 import os
 from tornado.web import Application, StaticFileHandler
-from handlers import IndexHandler, LoginHandler
+from handlers import IndexHandler, LoginHandler, ProfileHandler
 from utils.logger import Logger
 
 
 class MainHandler(Application):
+
     def __init__(self):
         Logger()
         root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -21,7 +22,8 @@ class MainHandler(Application):
         self.add_handlers("^.*$", [
             (r"/static/(.*)", StaticFileHandler, {"path": static_path}),
             (r"/", IndexHandler),
-            (r"/auth/(login|signup)", LoginHandler)
+            (r"/auth/(login|signup)", LoginHandler),
+            (r"/profile/edit", ProfileHandler)
         ])
 
 
@@ -29,4 +31,3 @@ if __name__ == '__main__':
     app = MainHandler()
     app.listen(30000)
     tornado.ioloop.IOLoop.current().start()
-
