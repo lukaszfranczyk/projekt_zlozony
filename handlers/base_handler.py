@@ -1,3 +1,4 @@
+import logging
 from tornado.web import RequestHandler
 from utils import Config
 from db.pgapi import PgApi
@@ -15,8 +16,8 @@ class BaseHandler(RequestHandler):
                 db_name=self.config['db_name'],
                 db_host=self.config['db_host']
             )
-        except Exception as exc:
-            print(exc)
+        except Exception:
+            logging.exception("Could not connect to database")
             raise
 
     @property

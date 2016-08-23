@@ -1,4 +1,5 @@
 import momoko
+import logging
 from tornado import ioloop
 from tornado.gen import coroutine
 from utils import Collection
@@ -14,9 +15,36 @@ class PgApi(metaclass=Collection):
         )
         self.db = momoko.Pool(dsn=dsn, size=self.__CONNECTION_POOL, ioloop=ioloop.IOLoop.instance())
         self.db.connect()
-        print(dsn)
 
     @coroutine
-    def check(self):
-        cursor = yield self.db.execute('SELECT 1')
-        print(cursor.fetchone())
+    def create_user(self, name, password):
+        try:
+            insert_sql = 'INSERT INTO users (name, password) VALUES (%s, %s)'
+            yield self.db.execute(insert_sql, [name, password])
+            logging.info("User created")
+        except Exception:
+            logging.exception("There was problem to add user %s", name)
+            return
+        return 'OK'
+
+    @coroutine
+    def get_user(self, user_id=None, user_name=None):
+        args = []
+        if user_id is None and user_name is None:
+            raise Exception("Invalid user_id and user_name")
+        select_sql = 'SELECT * FROM users where '
+        if user_id is not None:
+            select_sql += 'id = %s'
+            args.append(user_id)
+        if user_name is not None:
+            if user_id is not None:
+                select_sql += ' AND '
+            select_sql += 'name = %s'
+            args.append(user_name)
+        try:
+            cursor = yield self.db.execute(select_sql, args)
+        except Exception:
+            logging.exception("There was a problem to get user %s", args)
+            return
+        return cursor.fetchone()
+
