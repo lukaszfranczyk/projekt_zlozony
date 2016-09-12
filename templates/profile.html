@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block action_template %}
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <a href="#" class="thumbnail">
+                <img src="..." alt="...">
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <p>Your id is: {{ user_data['id'] }}</p>
+    </div>
+    <div class="row">
+        <form id="login-signup" method="post">
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input type="text" class="form-control" id="login" placeholder="Login" name="login"
+                       value="{{ user_data['name'] }}">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+            </div>
+            <div class="center-block" style="width:135px;">
+                <button type="submit" class="btn btn-success" data-action="/profile/edit">Edit</button>
+            </div>
+        </form>
+    </div>
+{% end %}
