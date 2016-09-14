@@ -52,7 +52,15 @@ class PgApi(metaclass=Collection):
         if cursor.rowcount == 0:
             return
 
-        temp = cursor.fetchone()
+        return User(**cursor.fetchone())
 
-        return User(**temp)
+    def update_user(self, user_name, password, first_name, last_name, email):
+        sql = 'UPDATE users SET password = %s, first_name = %s, last_name = %s, email = %s WHERE login = %s'
+        args = [password, first_name, last_name, email, user_name]
+        try:
+            yield self.db.execute(sql, args)
+            logging.info("User updated")
+        except Exception:
+            logging.exception("There was problem to update user %s", user_name)
+            return
 
