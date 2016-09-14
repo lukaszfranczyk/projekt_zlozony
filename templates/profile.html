@@ -8,14 +8,14 @@
         </div>
     </div>
     <div class="row">
-        <p>Your id is: {{ user_data['id'] }}</p>
+        <p>Your id is: {{ user_data.id }}</p>
     </div>
     <div class="row">
         <form id="login-signup" method="post">
             <div class="form-group">
                 <label for="login">Login</label>
                 <input type="text" class="form-control" id="login" placeholder="Login" name="login"
-                       value="{{ user_data['name'] }}">
+                       value="{{ user_data.login }}">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>

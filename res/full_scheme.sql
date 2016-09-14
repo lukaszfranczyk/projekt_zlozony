@@ -1,8 +1,12 @@
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
-    name varchar(255) NOT NULL,
+    first_name varchar(255),
+    last_name varchar(255),
+    login varchar(255) NOT NULL,
     password varchar(128) NOT NULL,
-    CONSTRAINT name UNIQUE(name)
+    email varchar(50),
+    CONSTRAINT login UNIQUE(login)
 );
 
 GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO portal_user;

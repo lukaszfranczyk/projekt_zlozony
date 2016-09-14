@@ -1,6 +1,7 @@
 import momoko
 import psycopg2
 import logging
+from data_model import User
 from tornado import ioloop
 from tornado.gen import coroutine
 from utils import Collection
@@ -20,7 +21,7 @@ class PgApi(metaclass=Collection):
     @coroutine
     def create_user(self, name, password):
         try:
-            insert_sql = 'INSERT INTO users (name, password) VALUES (%s, %s)'
+            insert_sql = 'INSERT INTO users (login, password) VALUES (%s, %s)'
             yield self.db.execute(insert_sql, [name, password])
             logging.info("User created")
         except Exception:
@@ -33,19 +34,25 @@ class PgApi(metaclass=Collection):
         args = []
         if user_id is None and user_name is None:
             raise Exception("Invalid user_id and user_name")
-        select_sql = 'SELECT * FROM users where '
+        select_sql = 'SELECT id, login, password, first_name, last_name, email FROM users where '
         if user_id is not None:
             select_sql += 'id = %s'
             args.append(user_id)
         if user_name is not None:
             if user_id is not None:
                 select_sql += ' AND '
-            select_sql += 'name = %s'
+            select_sql += 'login = %s'
             args.append(user_name)
         try:
             cursor = yield self.db.execute(select_sql, args, cursor_factory=psycopg2.extras.RealDictCursor)
         except Exception:
             logging.exception("There was a problem to get user %s", args)
             return
-        return cursor.fetchone()
+
+        if cursor.rowcount == 0:
+            return
+
+        temp = cursor.fetchone()
+
+        return User(**temp)
 

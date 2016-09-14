@@ -27,7 +27,7 @@ class LoginHandler(BaseHandler):
         if user_data is None:
             self.render("login.html", error="Invalid username !")
             return
-        if user_data['password'] == password:
+        if user_data.password == password:
             self.set_secure_cookie("user", user, expires_days=1)
             self.redirect("/?user={}".format(user))
         else:
