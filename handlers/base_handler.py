@@ -6,6 +6,10 @@ from db.pgapi import PgApi
 
 class BaseHandler(RequestHandler):
 
+    def initialize(self, *args, **kwargs):
+        logging.info(self.request)
+        logging.info(kwargs)
+
     @property
     def db(self):
         try:

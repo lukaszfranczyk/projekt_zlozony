@@ -1,7 +1,7 @@
 import tornado
 import os
 from tornado.web import Application, StaticFileHandler
-from handlers import IndexHandler, LoginHandler, ProfileHandler
+from handlers import *
 from utils.logger import Logger
 
 
@@ -23,7 +23,9 @@ class MainHandler(Application):
             (r"/static/(.*)", StaticFileHandler, {"path": static_path}),
             (r"/", IndexHandler),
             (r"/auth/(login|signup)", LoginHandler),
-            (r"/profile/edit", ProfileHandler)
+            (r"/profile/edit", ProfileHandler),
+            (r"/messages", MessagesViewHandler),
+            (r"/connections", MessagesConnectionsHandler)
         ])
 
 
