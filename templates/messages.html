@@ -1,4 +1,15 @@
 {% extends "layout.html" %}
 {% block action_template %}
+    <div id="contacts-window">
+        <ul>
+            <li>No one is available</li>
+        </ul>
+    </div>
+    <div id="message-window">
 
+    </div>
+    <div id="text-window" style="display:none;">
+        <textarea id="messages"></textarea>
+        <button id="send-message">Send</button>
+    </div>
 {% end %}
