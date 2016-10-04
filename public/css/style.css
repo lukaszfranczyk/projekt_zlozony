@@ -5,3 +5,29 @@
 #content {
     float: left;
 }
+
+.active-user {
+    background: red;
+}
+
+.left-msg {
+    float: left;
+    width: 255px;
+    background: blue;
+}
+
+.right-msg {
+    float: right;
+    width: 255px;
+    background: green;
+}
+
+.new-msg {
+    background: grey;
+}
+
+#message-window {
+    width: 300px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
