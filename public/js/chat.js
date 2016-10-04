@@ -42,12 +42,12 @@ var CHAT = CHAT || {
                 $(this).on('click', function(event) {
                     $contacts.find("li.active-user").removeClass("active-user");
                     $(this).addClass("active-user");
-                    CHAT.activeUser = $(this).text();
+                    CHAT.activeUser = $(this).data('person');
                     $("#message-window").text("");
                     $("#text-window").show();
                     if($(this).hasClass("new-msg") && CHAT.activeUser == $(this).data("person")) {
                         $(this).removeClass("new-msg");
-                        delete newMsgList[name];
+                        delete newMsgList[CHAT.activeUser];
                         localStorage.setItem("new-msg-list", JSON.stringify(newMsgList));
                     }
                    var userMessages = localStorage.getItem(CHAT.activeUser);
