@@ -54,13 +54,25 @@ class PgApi(metaclass=Collection):
 
         return User(**cursor.fetchone())
 
-    def update_user(self, user_name, password, first_name, last_name, email):
-        sql = 'UPDATE users SET password = %s, first_name = %s, last_name = %s, email = %s WHERE login = %s'
-        args = [password, first_name, last_name, email, user_name]
+    @coroutine
+    def update_user(self, user_id, first_name, last_name, email):
+        sql = 'UPDATE users SET first_name = %s, last_name = %s, email = %s WHERE id = %s'
+        args = [first_name, last_name, email, user_id]
         try:
             yield self.db.execute(sql, args)
             logging.info("User updated")
         except Exception:
-            logging.exception("There was problem to update user %s", user_name)
+            logging.exception("There was problem with updating user %d", user_id)
+            return
+
+    @coroutine
+    def update_password(self, user_id, password):
+        sql = 'UPDATE users SET password = %s WHERE id = %s'
+        args = [password, user_id]
+        try:
+            yield self.db.execute(sql, args)
+            logging.info("Password updated")
+        except Exception:
+            logging.exception("There was problem with updating password for user %d", user_id)
             return
 
