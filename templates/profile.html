@@ -18,11 +18,34 @@
                        value="{{ user_data.login }}">
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                <label for="first_name">First name</label>
+                <input type="text" class="form-control" id="first_name" placeholder="First name" name="first_name"
+                       value="{{ user_data.first_name }}">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last name</label>
+                <input type="text" class="form-control" id="last_name" placeholder="Last name" name="last_name"
+                       value="{{ user_data.last_name }}">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="text" class="form-control" id="email" placeholder="E-mail" name="email"
+                       value="{{ user_data.email }}">
             </div>
             <div class="center-block" style="width:135px;">
-                <button type="submit" class="btn btn-success" data-action="/profile/edit">Edit</button>
+                <button type="submit" class="btn btn-success" data-action="/profile/edit/user?user={{ user_data.login }}">Edit</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form id="login-signup" method="post">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+                       value="" required>
+            </div>
+            <div class="center-block" style="width:135px;">
+                <button type="submit" class="btn btn-success" data-action="/profile/edit/password?user={{ user_data.login }}"/>Change password</button>
             </div>
         </form>
     </div>
