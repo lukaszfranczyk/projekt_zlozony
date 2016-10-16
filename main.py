@@ -23,10 +23,9 @@ class MainHandler(Application):
             (r"/static/(.*)", StaticFileHandler, {"path": static_path}),
             (r"/", IndexHandler),
             (r"/auth/(login|signup)", LoginHandler),
+            (r"/profile/edit", ProfileHandler),
             (r"/messages", MessagesViewHandler),
             (r"/connections", MessagesConnectionsHandler)
-            (r"/profile/edit", ProfileHandler),
-            (r"/profile/edit/(user|password)", ProfileHandler)
         ])
 
 
