@@ -56,3 +56,7 @@ class PgApi(metaclass=Collection):
 
         return User(**temp)
 
+    @coroutine
+    def insert_message(self, user_id, message):
+        sql = 'INSERT INTO messages (user_id, message, date) VALUES (%s, %s, %s)'
+        cursor = yield self.db.execute()
