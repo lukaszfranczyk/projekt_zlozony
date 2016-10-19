@@ -1,15 +1,16 @@
 {% extends "layout.html" %}
 {% block action_template %}
+    <h2 style="text-align: center">Chat</h2>
     <div id="contacts-window">
         <ul>
-            <li>No one is available</li>
+            <li style="background: none; text-align: left;">Getting users..</li>
         </ul>
     </div>
     <div id="message-window">
 
     </div>
     <div id="text-window" style="display:none;">
-        <textarea id="messages"></textarea>
-        <button id="send-message">Send</button>
+        <textarea class="form-control" id="messages"></textarea>
+        <button class="btn btn-success" id="send-message">Send</button>
     </div>
 {% end %}

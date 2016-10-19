@@ -15,10 +15,10 @@
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
-                    <!--<img alt="Brand" src="...">-->
-                    Logo
+                    <img alt="Brand" src="/static/images/logo.png" />
                 </a>
             </div>
+            {% if current_user is not None %}<span style="float:right; margin:20px"><a href="/logout">Logout</a></span>{% end %}
         </div>
     </nav>
     <div class="container">

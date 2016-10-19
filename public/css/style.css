@@ -52,12 +52,71 @@
     background: green;
 }
 
-.new-msg {
-    background: grey;
+.right-msg-board {
+    float: right;
+    width: 90%;
+    background: #eff5fb;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+button {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.left-msg-board {
+    float: left;
+    width: 90%;
+    background: #f2f3ff;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#contacts-window ul li.new-msg {
+    background: #19bd45;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% { opacity: 0.5; }
 }
 
 #message-window {
-    width: 300px;
+    width: 100%;
     max-height: 500px;
     overflow-y: scroll;
+    margin-top: 70px;
+}
+
+#message-window p {
+    margin-right: 5px;
+}
+
+#messages {
+    margin-top: 20px;
+}
+
+#text-window button {
+    width: 100%;
+    margin-top: 10px;
+}
+
+#contacts-window ul li {
+    float: left;
+    display: block;
+    list-type-style: none;
+    width: 49%;
+    font-weight: bold;
+    text-align:center;
+    margin: 2px;
+    background-color: #eaeaea;
+    padding: 5px;
+}
+
+#contacts-window ul li:hover {
+    background-color: #cdcece;
+    cursor: pointer;
 }

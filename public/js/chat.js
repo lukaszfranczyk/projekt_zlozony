@@ -59,10 +59,10 @@ var CHAT = CHAT || {
                             html += '<p class="';
                             switch(msg[0]) {
                                 case "send":
-                                    html += 'right-msg';
+                                    html += 'right-msg-board';
                                     break;
                                 case "recv":
-                                    html += 'left-msg';
+                                    html += 'left-msg-board';
                                     break;
                             }
                             html += '">' + msg[1] + '</p>';
@@ -98,7 +98,7 @@ var CHAT = CHAT || {
     recvMessage: function(data) {
         CHAT.saveHistory(data.data, data.recvFrom, 'recv');
         if(CHAT.activeUser == data.recvFrom) {
-            $("#message-window").append('<p class="left-msg">' + data.data + '</p>');
+            $("#message-window").append('<p class="left-msg-board">' + data.data + '</p>');
             CHAT.scrollToBottom();
         }
         if(CHAT.activeUser != data.recvFrom) {
@@ -122,7 +122,7 @@ var CHAT = CHAT || {
             try {
                 sock.send(JSON.stringify(data));
                 CHAT.saveHistory(msg, CHAT.activeUser, 'send');
-                $("#message-window").append('<p class="right-msg"">' + data.data + '</p>');
+                $("#message-window").append('<p class="right-msg-board"">' + data.data + '</p>');
                 CHAT.scrollToBottom();
             }
             catch(err) {

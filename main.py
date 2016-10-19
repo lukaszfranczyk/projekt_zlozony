@@ -26,7 +26,8 @@ class MainHandler(Application):
             (r"/messages", MessagesViewHandler),
             (r"/connections", MessagesConnectionsHandler),
             (r"/profile/edit", ProfileHandler),
-            (r"/profile/edit/(user|password)", ProfileHandler)
+            (r"/profile/edit/(user|password)", ProfileHandler),
+            (r"/logout", LogoutHandler)
         ])
 
 

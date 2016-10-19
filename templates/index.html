@@ -1,20 +1,20 @@
 {% extends "layout.html" %}
 {% block action_template %}
-    <h1>Social board</h1>
+    <h1 style="text-align:center;">Social board</h1>
     <form method="post" action="/messages?user={{ current_user }}">
         <div class="form-group">
-            <label for="message">Write your thoughts on board - everyone can look at it !</label>
+            <label for="message" style="width:100%; text-align:center">Write your thoughts on board - everyone can look at it !</label>
             <textarea class="form-control" id="message" name="message" required></textarea>
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">Send</button>
+            <button style="width:100%;" type="submit" class="btn btn-primary">Send</button>
         </div>
     </form>
     <div>
         {% for data in board_messages %}
-        <div style="width: 90%; margin-top:10px;" {% if data['login'] == current_user %} class="right-msg" {else} class="left-msg" {% end %}>
-            <span>{{ data['login'] }} {{ data['add_date'].strftime("%Y-%m-%d %H:%M:%S") }}</span>
-            <p>{{ data['message'] }}</p>
+        <div {% if data['login'] == current_user %} class="right-msg-board" {% else %} class="left-msg-board" {% end %}>
+            <span style="font-weight:bold;">{{ data['login'] }}</span><span style="float:right;">{{ data['add_date'].strftime("%Y-%m-%d %H:%M:%S") }}</span>
+            <p style="border-top: 1px solid #b4b5b7">{{ data['message'] }}</p>
         </div>
         {% end %}
     </div>
