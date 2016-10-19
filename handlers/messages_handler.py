@@ -12,7 +12,6 @@ class MessagesViewHandler(BaseHandler):
     @authenticated
     @coroutine
     def get(self, *args, **kwargs):
-        logging.info(self.current_user)
         self.render("messages.html")
 
     @authenticated
