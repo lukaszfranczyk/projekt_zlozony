@@ -24,7 +24,7 @@ class MainHandler(Application):
             (r"/", IndexHandler),
             (r"/auth/(login|signup)", LoginHandler),
             (r"/messages", MessagesViewHandler),
-            (r"/connections", MessagesConnectionsHandler)
+            (r"/connections", MessagesConnectionsHandler),
             (r"/profile/edit", ProfileHandler),
             (r"/profile/edit/(user|password)", ProfileHandler)
         ])

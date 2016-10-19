@@ -12,7 +12,23 @@ class MessagesViewHandler(BaseHandler):
     @authenticated
     @coroutine
     def get(self, *args, **kwargs):
+        logging.info(self.current_user)
         self.render("messages.html")
+
+    @authenticated
+    @coroutine
+    def post(self, *args, **kwargs):
+        yield self.insert_message_on_board()
+        self.redirect("/?user={}".format(self.current_user))
+
+    @authenticated
+    @coroutine
+    def insert_message_on_board(self):
+        user = yield self.db.get_user(user_name=self.current_user)
+        if user is None:
+            raise Exception("Error while inserting message on board")
+        message = self.get_argument("message")
+        yield self.db.insert_message_on_board(user.id, message)
 
 
 class MessagesConnectionsHandler(WebSocketHandler):

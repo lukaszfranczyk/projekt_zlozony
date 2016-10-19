@@ -9,5 +9,12 @@ CREATE TABLE users (
     CONSTRAINT login UNIQUE(login)
 );
 
+CREATE TABLE board (
+    id BIGSERIAL PRIMARY KEY,
+    user_id BIGINT REFERENCES users(id),
+    message TEXT,
+    add_date TIMESTAMP DEFAULT now()
+)
+
 GRANT ALL ON ALL TABLES IN SCHEMA PUBLIC TO portal_user;
 GRANT ALL ON ALL SEQUENCES IN SCHEMA PUBLIC TO portal_user;
