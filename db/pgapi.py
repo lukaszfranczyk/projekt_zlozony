@@ -76,3 +76,15 @@ class PgApi(metaclass=Collection):
             logging.exception("There was problem with updating password for user %d", user_id)
             return
 
+    @coroutine
+    def insert_message_on_board(self, user_id, message):
+        sql = 'INSERT INTO board (user_id, message) VALUES (%s, %s)'
+        yield self.db.execute(sql, (user_id, message))
+        logging.info("Message inserted")
+
+    @coroutine
+    def get_board_messages(self, limit=20):
+        sql = 'SELECT board.*, users.login FROM board ' \
+              'JOIN users ON users.id = board.user_id ORDER BY add_date DESC LIMIT %s';
+        cursor = yield self.db.execute(sql, (limit,), cursor_factory=psycopg2.extras.RealDictCursor)
+        return cursor.fetchall()

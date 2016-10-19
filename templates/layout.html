@@ -1,17 +1,7 @@
 {% extends "base.html" %}
 {% block body_template %}
-    <nav class="navbar navbar-default navbar-bg-blue">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">
-                    <!--<img alt="Brand" src="...">-->
-                    Logo
-                </a>
-            </div>
-        </div>
-    </nav>
     <div id="nav-sidebar">
-        <ul class="nav nav-pills nav-stacked col-xs-3">
+        <ul class="nav nav-pills nav-stacked col-xs-2">
             <li role="presentation" {% if request.uri.startswith('/?user') %} class="active" {% end %}><a href="/?user={{ current_user }}">Home</a></li>
             <li role="presentation" {% if request.uri.startswith('/profile') %} class="active" {% end %}><a href="/profile/edit?user={{ current_user }}">Profile</a></li>
             <li role="presentation" {% if request.uri.startswith('/messages') %} class="active" {% end %}><a href="/messages?user={{ current_user }}">Messages</a></li>

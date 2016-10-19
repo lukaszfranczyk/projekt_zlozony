@@ -1,4 +1,21 @@
 {% extends "layout.html" %}
 {% block action_template %}
-    <h1>Hello</h1>
+    <h1>Social board</h1>
+    <form method="post" action="/messages?user={{ current_user }}">
+        <div class="form-group">
+            <label for="message">Write your thoughts on board - everyone can look it !</label>
+            <textarea class="form-control" id="message" name="message" required></textarea>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+    </form>
+    <div>
+        {% for data in board_messages %}
+        <div style="width: 90%; margin-top:10px;" {% if data['login'] == current_user %} class="right-msg" {else} class="left-msg" {% end %}>
+            <span>{{ data['login'] }} {{ data['add_date'].strftime("%Y-%m-%d %H:%M:%S") }}</span>
+            <p>{{ data['message'] }}</p>
+        </div>
+        {% end %}
+    </div>
 {% end %}
