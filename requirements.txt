@@ -1,3 +1,4 @@
+PyYaml==3.12
 tornado==4.4.1
 momoko==2.2.3
 

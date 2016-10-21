@@ -1,3 +1,10 @@
+CREATE DATABASE portal;
+
+CREATE ROLE portal_user WITH LOGIN;
+ALTER ROLE portal_user PASSWORD 'portal_password';
+
+\connect portal;
+
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
@@ -9,6 +16,7 @@ CREATE TABLE users (
     CONSTRAINT login UNIQUE(login)
 );
 
+DROP TABLE IF EXISTS board;
 CREATE TABLE board (
     id BIGSERIAL PRIMARY KEY,
     user_id BIGINT REFERENCES users(id),
